@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">VPR&amp;DConsumrz</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="please_enter_yor_email">please enter yor Email</string>
+    <string name="welcome_to_app">welcome to App</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="privacy">Privacy</string>
+    <string name="signing_app">Signing App</string>
+    <string name="already_have_an_account">Already have an account ?</string>
+    <string name="verify_the_password">Verify the password</string>
+    <string name="posts">posts</string>
+    <string name="adding_new_post">adding New Post</string>
+    <string name="title_post">Title post</string>
+    <string name="body_post">Body post</string>
+    <string name="publish">Publish</string>
+    <string name="body_comment">Body Comment</string>
+    <string name="register">Register</string>
+</resources>
