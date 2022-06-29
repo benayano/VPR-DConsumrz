@@ -6,8 +6,10 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
+import androidx.preference.PreferenceManager
 import com.example.vprdconsumrz.R
 import com.example.vprdconsumrz.model.repository.AccountRepository
+import com.example.vprdconsumrz.model.repository.UserDetails
 import com.example.vprdconsumrz.viewModel.MainViewModel
 import com.example.vprdconsumrz.viewModel.MainViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
@@ -19,7 +21,8 @@ private const val POST_BODY = "bodyPost"
 class EditPost : Fragment(R.layout.fragment_edit_post) {
 
     private val mainViewModel: MainViewModel by activityViewModels {
-        MainViewModelFactory(AccountRepository)
+        val userDetails = UserDetails(PreferenceManager.getDefaultSharedPreferences(this.requireContext()))
+        MainViewModelFactory(AccountRepository, userDetails)
     }
 
     private val btnEdit: Button by lazy { requireView().findViewById(R.id.btnEditPost) }

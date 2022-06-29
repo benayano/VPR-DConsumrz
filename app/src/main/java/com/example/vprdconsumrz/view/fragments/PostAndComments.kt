@@ -7,11 +7,13 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vprdconsumrz.R
 import com.example.vprdconsumrz.data.CommentDataView
 import com.example.vprdconsumrz.model.repository.AccountRepository
+import com.example.vprdconsumrz.model.repository.UserDetails
 import com.example.vprdconsumrz.view.adapters.CommentAdapter
 import com.example.vprdconsumrz.view.fragments.EditComment.Companion.newInstanceEditComment
 import com.example.vprdconsumrz.viewModel.MainViewModel
@@ -25,7 +27,8 @@ private const val POST_BODY = "postId"
 class PostAndComments : Fragment(R.layout.fragment_post_and_comments) {
 
     private val mainViewModel: MainViewModel by activityViewModels {
-        MainViewModelFactory(AccountRepository)
+        val userDetails = UserDetails(PreferenceManager.getDefaultSharedPreferences(this.requireContext()))
+        MainViewModelFactory(AccountRepository, userDetails)
     }
 
     private val rvComment: RecyclerView by lazy { requireView().findViewById(R.id.rvComments) }

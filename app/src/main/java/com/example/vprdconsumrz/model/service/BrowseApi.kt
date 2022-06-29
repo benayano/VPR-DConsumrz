@@ -67,23 +67,23 @@ interface BrowseApi {
     @PUT("/account/lostpassword")
     suspend fun forgotPassword(
         @Query(EMAIL) email: String
-    ): ResponseData<AccountDataResponse?>
+    ): ResponseData<AccountResponse?>
 
     //Registration
 
     @PUT("account")
     suspend fun registrationPut(
         @Query(PASSWORD) password: String
-    ): ResponseData<AccountDataResponse?>
+    ): ResponseData<AccountResponse?>
 
     @POST("account")
     suspend fun registration(
         @Query(EMAIL) email: String,
         @Query(PASSWORD) password: String
-    ): ResponseData<AccountDataResponse?>
+    ): ResponseData<AccountResponse?>
 
     @GET("account")
-    suspend fun getAccount(): ResponseData<AccountDataResponse>
+    suspend fun getAccount(): ResponseData<AccountResponse>
 
     //Signin
 
@@ -91,6 +91,6 @@ interface BrowseApi {
     suspend fun signingInPost(
         @Query(EMAIL) email: String,
         @Query(PASSWORD) password: String
-    ): ResponseData<AccountDataResponse?>
+    ): ResponseData<AccountResponse?>
 
 }

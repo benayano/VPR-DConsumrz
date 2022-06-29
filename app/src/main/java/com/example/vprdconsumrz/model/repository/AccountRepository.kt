@@ -1,7 +1,7 @@
 package com.example.vprdconsumrz.model.repository
 
 import com.example.vprdconsumrz.model.RetrofitCreator
-import com.example.vprdconsumrz.model.responce.AccountDataResponse
+import com.example.vprdconsumrz.model.responce.AccountResponse
 import com.example.vprdconsumrz.model.responce.CommentsResponse
 import com.example.vprdconsumrz.model.responce.PostsResponse
 import com.example.vprdconsumrz.model.responce.ResponseData
@@ -65,7 +65,7 @@ object AccountRepository {
         password: String
     ) = browseApi.registration(email = email, password = password)
 
-    suspend fun getAccount(): ResponseData<AccountDataResponse> = browseApi.getAccount()
+    suspend fun getAccount(): ResponseData<AccountResponse> = browseApi.getAccount()
 
     //Signin
 

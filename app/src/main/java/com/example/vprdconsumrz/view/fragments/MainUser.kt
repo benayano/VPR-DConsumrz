@@ -7,11 +7,13 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vprdconsumrz.R
 import com.example.vprdconsumrz.data.PostData
 import com.example.vprdconsumrz.model.repository.AccountRepository
+import com.example.vprdconsumrz.model.repository.UserDetails
 import com.example.vprdconsumrz.view.adapters.PostAdapters
 import com.example.vprdconsumrz.view.fragments.EditPost.Companion.newInstanceEditPost
 import com.example.vprdconsumrz.view.fragments.PostAndComments.Companion.newInstancePostAntComment
@@ -26,7 +28,8 @@ private const val PASSWORD = "password"
 
 class MainUser : Fragment(R.layout.fragment_main_user) {
     private val mainViewModel: MainViewModel by activityViewModels {
-        MainViewModelFactory(AccountRepository)
+        val userDetails = UserDetails(PreferenceManager.getDefaultSharedPreferences(this.requireContext()))
+        MainViewModelFactory(AccountRepository, userDetails)
     }
 
     private var id: Int? = null

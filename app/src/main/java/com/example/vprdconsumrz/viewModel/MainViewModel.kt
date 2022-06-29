@@ -9,6 +9,7 @@ import com.example.vprdconsumrz.data.CommentDataView
 import com.example.vprdconsumrz.data.ErrorData
 import com.example.vprdconsumrz.data.PostData
 import com.example.vprdconsumrz.model.repository.AccountRepository
+import com.example.vprdconsumrz.model.repository.UserDetails
 import com.example.vprdconsumrz.model.responce.CommentResponse
 import com.example.vprdconsumrz.model.responce.PostsResponse
 import com.example.vprdconsumrz.model.responce.ResponseData
@@ -16,7 +17,13 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
-class MainViewModel(private val accountRepository: AccountRepository) : ViewModel() {
+class MainViewModel(private val accountRepository: AccountRepository ,private val userDetails: UserDetails) : ViewModel() {
+
+    private val tag = "mainViewModel"
+
+    private val userLivData :MutableLiveData<AccountData> by lazy {
+        MutableLiveData()
+    }
 
     private val postsData: MutableLiveData<List<PostData>> by lazy {
         MutableLiveData()
@@ -34,7 +41,7 @@ class MainViewModel(private val accountRepository: AccountRepository) : ViewMode
 
     //------------------------comments-----------------------------------------
     fun getComment() = commentsData
-    fun loadComment() = viewModelScope.launch {
+    private fun loadComment() = viewModelScope.launch {
         commentsData.postValue(convertor.responseToCommentData(accountRepository.getComments()))
     }
 
@@ -245,6 +252,13 @@ class MainViewModel(private val accountRepository: AccountRepository) : ViewMode
                 getAccount()
             }
         }
+//---------------------------------------------------------AccountData----------------------------
+    fun getUserDetails()= userLivData
 
-    private val tag = "mainViewModel"
+    fun loadAccountData() = viewModelScope.launch {
+        userLivData.postValue(userDetails.loadUser())
+    }
+    fun saveDetails(accountData: AccountData) = viewModelScope.launch {
+        userDetails.convertAndSaveAccountData(accountData)
+    }
 }

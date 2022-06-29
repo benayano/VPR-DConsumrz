@@ -19,7 +19,7 @@ class Convertor {
         return listPostData
     }
 
-    fun responseTeAccount(account: ResponseData<AccountDataResponse>): AccountData =
+    fun responseTeAccount(account: ResponseData<AccountResponse>): AccountData =
         AccountData(
             id = account.data.id,
             email = account.data.email,
@@ -51,7 +51,7 @@ class Convertor {
     }
 
     fun dataAccountToResponse(email: String, password: String): AccountData {
-        return AccountData(id =10,email = email,password =password)
+        return AccountData(id =10, email = email, password =password)
     }
 
 }

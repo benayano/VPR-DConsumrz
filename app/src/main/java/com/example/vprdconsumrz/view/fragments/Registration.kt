@@ -8,8 +8,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
+import androidx.preference.PreferenceManager
 import com.example.vprdconsumrz.R
+import com.example.vprdconsumrz.data.AccountData
 import com.example.vprdconsumrz.model.repository.AccountRepository
+import com.example.vprdconsumrz.model.repository.UserDetails
 import com.example.vprdconsumrz.view.fragments.MainUser.Companion.newInstanceMainUser
 import com.example.vprdconsumrz.viewModel.MainViewModel
 import com.example.vprdconsumrz.viewModel.MainViewModelFactory
@@ -18,7 +21,8 @@ import com.google.android.material.textfield.TextInputEditText
 class Registration : Fragment(R.layout.fragment_registration) {
 
     private val mainViewModel: MainViewModel by activityViewModels {
-        MainViewModelFactory(AccountRepository)
+        val userDetails = UserDetails(PreferenceManager.getDefaultSharedPreferences(this.requireContext()))
+        MainViewModelFactory(AccountRepository, userDetails)
     }
 
 
@@ -34,22 +38,28 @@ class Registration : Fragment(R.layout.fragment_registration) {
 
         btnRegistration.setOnClickListener {
             parentFragmentManager.commit {
-                if (emailAndPasswordEmpty()) {
-                    shortMsg("please enter valid password")
-                } else if (password.text.toString() != password2.text.toString()) {
-                    shortMsg("the passwords are not the same!!")
-                } else {
-                    mainViewModel.registration(email = email.text.toString(),password= password.text.toString())
-                    replace(
-                        R.id.mainContainerFragment,
-                        newInstanceMainUser(
-                            id = 10,
-                            email = email.text.toString(),
-                            password = password.text.toString()
+                when{
+                    emailAndPasswordEmpty()->shortMsg("please enter valid password")
+                    password.text.toString() != password2.text.toString()->shortMsg("please enter valid password")
+                    else -> {
+                        val email = email.text.toString()
+                        val password= password.text.toString()
+                        //for testing
+                        mainViewModel.registration(email,password)
+                       mainViewModel.getAccount().observe(viewLifecycleOwner){
+                           mainViewModel.saveDetails(it)
+                       }
+                        replace(
+                            R.id.mainContainerFragment,
+                            newInstanceMainUser(
+                                // for test
+                                id =10,
+                                email = email,
+                                password = password
+                            )
                         )
-                    )
+                    }
                 }
-
             }
         }
         tvHaveAccount.setOnClickListener {
