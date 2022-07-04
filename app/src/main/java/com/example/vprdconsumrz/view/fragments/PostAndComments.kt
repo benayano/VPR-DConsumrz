@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
@@ -46,8 +47,10 @@ class PostAndComments : Fragment(R.layout.fragment_post_and_comments) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.title = "Post And Comments🌟"
 
-       tvTitlePost.text = postTitle
+
+        tvTitlePost.text = postTitle
         tvBodyPost.text = postBody
 
         rvComment.apply {

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
@@ -35,6 +36,8 @@ class EditComment : Fragment(R.layout.fragment_edit_comment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.title = "Edit Comment🌟"
+
         bodyEditComment.text?.let { bodyEditComment->
             text?.let { textx ->
                 bodyEditComment ?:  textx
