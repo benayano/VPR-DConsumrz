@@ -142,7 +142,7 @@ class MainViewModel(private val accountRepository: AccountRepository ,private va
     }
 
 
-    fun postPost(title: String, body: String) {
+    fun createPost(title: String, body: String) {
         viewModelScope.launch {
 
            val response = try {

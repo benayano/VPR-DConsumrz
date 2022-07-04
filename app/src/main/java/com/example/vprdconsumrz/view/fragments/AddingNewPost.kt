@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -38,7 +37,8 @@ class AddingNewPost : Fragment(R.layout.fragment_adding_new_post) {
             if (titleOrBodyEmpty()){
                 shortMsg("no value in Post")
             }else{
-                mainViewModel.postPost(title = titlePost.text.toString(), body = bodyPost.text.toString())
+                mainViewModel.createPost(title = titlePost.text.toString(), body = bodyPost.text.toString())
+                longMsg("${titlePost.text} \n ${bodyPost.text}")
                 returnToMainUser()
             }
 
@@ -60,4 +60,7 @@ class AddingNewPost : Fragment(R.layout.fragment_adding_new_post) {
 
     private fun shortMsg(msg: String) =
         Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+
+    private fun longMsg(msg: String) =
+        Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
 }
