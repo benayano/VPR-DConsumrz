@@ -21,7 +21,8 @@ import com.google.android.material.textfield.TextInputEditText
 class Registration : Fragment(R.layout.fragment_registration) {
 
     private val mainViewModel: MainViewModel by activityViewModels {
-        val userDetails = UserDetails(PreferenceManager.getDefaultSharedPreferences(this.requireContext()))
+        val userDetails =
+            UserDetails(PreferenceManager.getDefaultSharedPreferences(this.requireContext()))
         MainViewModelFactory(AccountRepository, userDetails)
     }
 
@@ -38,22 +39,22 @@ class Registration : Fragment(R.layout.fragment_registration) {
 
         btnRegistration.setOnClickListener {
             parentFragmentManager.commit {
-                when{
-                    emailAndPasswordEmpty()->shortMsg("please enter valid password")
-                    password.text.toString() != password2.text.toString()->shortMsg("please enter valid password")
+                when {
+                    emailAndPasswordEmpty() -> shortMsg("please enter valid password")
+                    password.text.toString() != password2.text.toString() -> shortMsg("please enter valid password")
                     else -> {
                         val email = email.text.toString()
-                        val password= password.text.toString()
+                        val password = password.text.toString()
                         //for testing
-                        mainViewModel.registration(email,password)
-                       mainViewModel.getAccount().observe(viewLifecycleOwner){
-                           mainViewModel.saveDetails(it)
-                       }
+                        mainViewModel.registration(email, password)
+
+                        mainViewModel.saveDetails(AccountData(10,email= email,password = password))
+
                         replace(
                             R.id.mainContainerFragment,
                             newInstanceMainUser(
                                 // for test
-                                id =10,
+                                id = 10,
                                 email = email,
                                 password = password
                             )

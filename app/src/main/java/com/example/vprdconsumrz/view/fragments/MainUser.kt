@@ -68,7 +68,10 @@ class MainUser : Fragment(R.layout.fragment_main_user) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        tvMain.text = "$id,$email,$password"
+        mainViewModel.getUserDetails().observe(viewLifecycleOwner){
+            tvMain.text = "$it"
+        }
+
 
         super.onViewCreated(view, savedInstanceState)
         rvPosts.apply {

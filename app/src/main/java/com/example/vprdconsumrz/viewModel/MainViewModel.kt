@@ -255,10 +255,11 @@ class MainViewModel(private val accountRepository: AccountRepository ,private va
 //---------------------------------------------------------AccountData----------------------------
     fun getUserDetails()= userLivData
 
-    fun loadAccountData() = viewModelScope.launch {
+    private fun loadAccountData() = viewModelScope.launch {
         userLivData.postValue(userDetails.loadUser())
     }
     fun saveDetails(accountData: AccountData) = viewModelScope.launch {
         userDetails.convertAndSaveAccountData(accountData)
+        loadAccountData()
     }
 }
