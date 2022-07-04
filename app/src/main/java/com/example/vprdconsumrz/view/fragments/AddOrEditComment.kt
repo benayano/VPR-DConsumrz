@@ -97,7 +97,7 @@ class EditComment : Fragment(R.layout.fragment_edit_comment) {
             module: String?, // posts
             module_id: Int?,// post.id)
         ) =
-            EditComment().apply {1996
+            EditComment().apply {
                 arguments = Bundle().apply {
                     putInt(ID, id)
                     if (owner != null) {
