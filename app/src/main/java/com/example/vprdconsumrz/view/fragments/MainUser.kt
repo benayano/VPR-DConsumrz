@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
@@ -67,6 +68,7 @@ class MainUser : Fragment(R.layout.fragment_main_user) {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        (activity as AppCompatActivity).supportActionBar?.title = "All your post🌟"
 
         mainViewModel.getUserDetails().observe(viewLifecycleOwner){
             tvMain.text = "$it"
