@@ -14,26 +14,26 @@ interface BrowseApi {
     }
 
 
-    @DELETE("/posts/{id}/comments")
+    @DELETE("posts/{id}/comments")
     suspend fun deleteComment(
         @Query(ID) id: Int
     ): ResponseData<CommentResponse?>
 
-    @PUT("/posts/{id}/comments")
+    @PUT("posts/{id}/comments")
     suspend fun editComment(
         @Query(ID) id: Int,
         @Query(TEXT) text: String
     ): ResponseData<CommentResponse?>
 
 
-    @POST("/posts/{id}/comments")
+    @POST("posts/{id}/comments")
     suspend fun postComment(
         @Query(TEXT) text: String
     ): ResponseData<CommentResponse?>
 
 
     //get
-    @GET("/posts/{id}/comments")
+    @GET("posts/{id}/comments")
     suspend fun getComments(): ResponseData<CommentsResponse>
 
     //------------------------comments-----------------------------------------
@@ -64,7 +64,7 @@ interface BrowseApi {
 //-------------------------------------Account----------------------------------------
     //Lost password
 
-    @PUT("/account/lostpassword")
+    @PUT("account/lostpassword")
     suspend fun forgotPassword(
         @Query(EMAIL) email: String
     ): ResponseData<AccountResponse?>
